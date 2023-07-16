@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/scrimba-vanlife-project/static/css/main.63d26091.css",
-    "main.js": "/scrimba-vanlife-project/static/js/main.ac6d6b9c.js",
+    "main.js": "/scrimba-vanlife-project/static/js/main.64e5ef83.js",
     "static/media/home-bg.png": "/scrimba-vanlife-project/static/media/home-bg.51bdd9611a91dc670e5b.png",
     "static/media/about-bg.png": "/scrimba-vanlife-project/static/media/about-bg.8d6118dfcf832ee14723.png",
     "static/media/logo.png": "/scrimba-vanlife-project/static/media/logo.d896bdc29dba92d79646.png",
     "index.html": "/scrimba-vanlife-project/index.html",
     "main.63d26091.css.map": "/scrimba-vanlife-project/static/css/main.63d26091.css.map",
-    "main.ac6d6b9c.js.map": "/scrimba-vanlife-project/static/js/main.ac6d6b9c.js.map"
+    "main.64e5ef83.js.map": "/scrimba-vanlife-project/static/js/main.64e5ef83.js.map"
   },
   "entrypoints": [
     "static/css/main.63d26091.css",
-    "static/js/main.ac6d6b9c.js"
+    "static/js/main.64e5ef83.js"
   ]
 }
