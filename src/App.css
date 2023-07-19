@@ -226,12 +226,18 @@ img {
     text-decoration: underline;
 }
 
-.vans-filter > .filter {
+.filter {
     text-transform: capitalize;
     padding: .8em 1.25em;
     border-radius: 5px;
     background-color: #FFEAD0;
     color: #4D4D4D;
+
+    cursor: pointer;
+}
+
+.vans-filter--clean {
+    cursor: pointer;
 }
 
 .vans-container {
@@ -255,6 +261,11 @@ img {
     font-size: var(--fs-500);
     font-weight: var(--fw-bold);
     flex-grow: 1;
+}
+
+.van--name > a {
+    display: block;
+    width: fit-content;
 }
 
 .van--price {
@@ -281,12 +292,12 @@ img {
     text-transform: capitalize;
     padding: .5em 1em;
     border-radius: 5px;
-    color: #FFEAD0;
+    cursor: pointer;
 }
 
-.van--type-rugged { background-color: #115E59 }
-.van--type-simple { background-color: #E17654 }
-.van--type-luxury { background-color: #161616 }
+.van--type-rugged { background-color: #115E59; color: #FFEAD0 }
+.van--type-simple { background-color: #E17654; color: #FFEAD0 }
+.van--type-luxury { background-color: #161616; color: #FFEAD0 }
 
 /* Others */
 
