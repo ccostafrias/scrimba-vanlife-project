@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/scrimba-vanlife-project/static/css/main.819a5104.css",
-    "main.js": "/scrimba-vanlife-project/static/js/main.7c7e62e1.js",
+    "main.css": "/scrimba-vanlife-project/static/css/main.fd052b02.css",
+    "main.js": "/scrimba-vanlife-project/static/js/main.fe8823e3.js",
     "static/media/home-bg.png": "/scrimba-vanlife-project/static/media/home-bg.51bdd9611a91dc670e5b.png",
     "static/media/about-bg.png": "/scrimba-vanlife-project/static/media/about-bg.8d6118dfcf832ee14723.png",
     "static/media/logo.png": "/scrimba-vanlife-project/static/media/logo.d896bdc29dba92d79646.png",
     "index.html": "/scrimba-vanlife-project/index.html",
-    "main.819a5104.css.map": "/scrimba-vanlife-project/static/css/main.819a5104.css.map",
-    "main.7c7e62e1.js.map": "/scrimba-vanlife-project/static/js/main.7c7e62e1.js.map"
+    "main.fd052b02.css.map": "/scrimba-vanlife-project/static/css/main.fd052b02.css.map",
+    "main.fe8823e3.js.map": "/scrimba-vanlife-project/static/js/main.fe8823e3.js.map"
   },
   "entrypoints": [
-    "static/css/main.819a5104.css",
-    "static/js/main.7c7e62e1.js"
+    "static/css/main.fd052b02.css",
+    "static/js/main.fe8823e3.js"
   ]
 }
