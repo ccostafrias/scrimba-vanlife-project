@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react"
 
-
-import Van from "../components/Van"
-import Filter from "../components/Filter"
+import Van from "./Van"
+import Filter from "../../components/Filter"
+import Loading from "../../components/Loading"
 
 export default function Vans() {
     const [vans, setVans] = useState([])
     const [types, setTypes] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         fetch("/api/vans")
             .then(res => res.json())
-            .then(data => setVans(data.vans))
-        }, [])
+            .then(data => {
+                setVans(data.vans)
+                setIsLoading(false)
+            })
+            
+    }, [])
         
     useEffect(() => {
         if (vans !== []) {
@@ -80,20 +85,26 @@ export default function Vans() {
     })
     
     return (
-        <main className="main-vans">
-            <h2>Explore our van options</h2>
-            <div className="vans-filter">
-                {filtersElements}
-                <button 
-                    className="vans-filter--clean"
-                    onClick={clearFilter}
-                >
-                    Clear filters
-                </button>
-            </div>
-            <div className="vans-container">
-                {vanElements}
-            </div>
-        </main>
+        <>
+            {!isLoading ? 
+                <main className="main-vans">
+                    <h2>Explore our van options</h2>
+                    <div className="vans-filter">
+                        {filtersElements}
+                        <button 
+                            className="vans-filter--clean"
+                            onClick={clearFilter}
+                        >
+                            Clear filters
+                        </button>
+                    </div>
+                    <div className="vans-container">
+                        {vanElements}
+                    </div>
+                </main>
+            : (
+                <Loading />
+            )}
+        </>
     )
 }

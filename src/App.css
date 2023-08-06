@@ -38,6 +38,7 @@ h6 {
     font-family: var(--font-main);
     font-size: var(--fs-400);
     font-weight: var(--fw-regular);
+    color: #161616;
 }
 
 button, input {
@@ -61,6 +62,10 @@ img {
     max-width: 100%;
 }
 
+body {
+    background-color: #FFF7ED;
+}
+
 #root {
     height: 100%;
     display: grid;
@@ -71,8 +76,13 @@ img {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: white;
+    background-color: #FFF7ED;
     padding: 3rem 1.5rem;
+}
+
+.nav-white {
+    padding: 2rem 0;
+    background-color: #fff;
 }
 
 .nav--img {
@@ -86,6 +96,10 @@ img {
 .nav > a {
     font-weight: var(--fw-bold);
     color: #4D4D4D
+}
+
+.nav > .active-link {
+    text-decoration: underline;
 }
 
 .footer {
@@ -122,7 +136,7 @@ img {
 
 .main-home--content {
     max-width: 620px;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     margin: 0 auto;
 }
 
@@ -134,20 +148,6 @@ img {
 }
 
 .main-home--content > p {
-    color: #fff;
-}
-
-.main-home--content > .button-home {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    margin-top: 3em;
-    padding: .75rem;
-    border-radius: 5px;
-
-    background-color: #FF8C38;
     color: #fff;
 }
 
@@ -201,7 +201,7 @@ img {
 
 /* Main Vans */
 
-.main-vans {
+.main-vans, .main-detail {
     padding: 3rem 2rem 5rem;
     margin: auto;
     max-width: 720px;
@@ -221,7 +221,7 @@ img {
     margin-bottom: 2em;
 }
 
-.vans-filter > button {
+.vans-filter--clean {
     margin-left: auto;
     text-decoration: underline;
 }
@@ -248,6 +248,7 @@ img {
 
 .van-img {
     margin-bottom: .75em;
+    border-radius: 5px;
 }
 
 .van-content {
@@ -272,14 +273,24 @@ img {
     font-size: var(--fs-500);
     font-weight: var(--fw-bold);
     position: relative;
+    width: fit-content;
 }
 
-.van--price::after {
+.van--price:not(.detailed)::after {
     content: "/day";
     font-size: .6em;
     position: absolute;
     top: 100%;
     right: 0;
+}
+
+.van--price.detailed::after {
+    content: "/day";
+    font-size: .75em;
+    font-weight: var(--fw-regular);
+    position: absolute;
+    bottom: 3px;
+    left: 100%;
 }
 
 .van--type-wrapper {
@@ -299,7 +310,54 @@ img {
 .van--type-simple { background-color: #E17654; color: #FFEAD0 }
 .van--type-luxury { background-color: #161616; color: #FFEAD0 }
 
+/* Main Van Detail */
+
+.main-detail .van--name {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-black);
+}
+
+.detail--back {
+    text-decoration: underline;
+    position: relative;
+}
+
+.detail--content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.detail--image {
+    margin: 2em 0 2em;
+}
+
 /* Others */
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    margin-top: 2em;
+    padding: .75rem;
+    border-radius: 5px;
+
+    background-color: #FF8C38;
+    color: #fff;
+}
+
+.arrow {
+    color: #858585;
+}
+
+.txt-center {
+    text-align: center;
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-500);
+    width: 100%;
+}
 
 .hover-opacity {
     transition: opacity .2s ease-out;
@@ -307,4 +365,295 @@ img {
 
 .hover-opacity:hover {
     opacity: .8;
+}
+
+.loader {
+    position: relative;
+    width: 130px;
+    height: 100px;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(#0277bd, #0277bd),
+    linear-gradient(#29b6f6, #4fc3f7), linear-gradient(#29b6f6, #4fc3f7);
+    background-size: 80px 70px, 30px 50px, 30px 30px;
+    background-position: 0 0, 80px 20px, 100px 40px;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.loading > h2 {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-black);
+}
+
+/* Host */
+
+.host-vans {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.host-vans > h2 {
+    font-weight: var(--fw-black);
+    font-size: var(--fs-xl);
+}
+
+.host-vans--cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.host-vans--card {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 1.5em 2em;
+    border-radius: 5px;
+    gap: 15px;
+    background-color: white;
+}
+
+.host-vans--card > img {
+    max-width: 80px;
+    border-radius: 5px;
+}
+
+.host-vans--detail {
+    padding: 1.5em 2em;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.host-vans--detail > header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.host-vans--detail > header > img {
+    max-width: 175px;
+    border-radius: 5px;
+}
+
+.host-vans--card .vans-name {
+    font-weight: var(--fw-bold);
+}
+
+.host-vans--card .vans-price {
+    color: #4D4D4D;
+}
+
+.host-vans--card--text {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.host-vans--detail .vans-name {
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-600);
+}
+
+.host-vans--detail .vans-price {
+    font-weight: var(--fw-bold);
+}
+
+.host-vans--detail .vans-price::after {
+    content: "/day";
+    font-weight: var(--fw-regular);
+}
+
+.host-vans--detail .van--type {
+    cursor: auto;
+}
+
+.van-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.van-detail {
+    text-transform: capitalize;
+}
+
+.detail-title {
+    font-weight: var(--fw-bold);
+}
+
+.detail-title::after {
+    content: " ";
+}
+
+/* Kombi */
+
+.kombi::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 30px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    border: 10px solid #000;
+    background-color: white;
+    animation: wheelSk 0.75s ease-in infinite alternate;
+    z-index: 999;
+}
+  
+.kombi::before {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    right: 30px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    border: 10px solid #000;
+    background-color: white;
+    animation: wheelSk 0.75s ease-in infinite alternate;
+    z-index: 999;
+}
+  
+@keyframes wheelSk {
+    0%, 50%, 100% { transform: translatey(0) }
+    30%, 90% { transform: translatey(-3px) }
+}
+
+.kombi {
+    position: relative;
+    width: 210px;
+    height: 100px;
+}
+  
+.upper {
+    position: absolute;
+    border-radius: 15px 15px 0 0;
+    background-color: white;
+    width: 100%;
+    height: 50px;
+
+    z-index: 1;
+}
+  
+.lower {
+    position: absolute;
+    border-radius: 0 0 5px 5px;
+    background-color: #88CCF1;
+    top: 50px;
+    width: 100%;
+    height: 50px;
+}
+  
+.windows {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    z-index: 2;
+}
+  
+.windows > * {
+    background-color: #e6cdaf;
+}
+  
+.window {
+    width: 45px;
+    height: 30px;
+    border-radius: 5px;
+}
+  
+.window-s {
+    width: 20px;
+    height: 30px;
+    border-radius: 5px;
+}
+  
+.window-l {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+}
+  
+.bumper {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: white;
+    z-index: 6;
+}
+
+.bumper-left {
+    bottom: -2px;
+    left: -5px;
+}
+
+.handle {
+    position: absolute;
+    width: 15px;
+    height: 7px;
+    border-radius: 5px;
+    background-color: gray;
+    z-index: 6;
+}
+
+.handle-left {
+    top: 55px;
+    left: 150px;
+}
+
+.handle-right {
+    top: 55px;
+    left: 95px;
+}
+
+.bumper-right {
+    bottom: -2px;
+    right: -5px;
+}
+
+.wheel {
+    position: absolute;
+    bottom: -1px;
+    width: 50px;
+    height: 22px;
+    background-color: black;
+    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+    opacity: 80%;
+    z-index: 5;
+}
+
+.wheel-left {
+    left: 20px;
+}
+
+.wheel-right {
+    right: 20px;
+}
+  
+.light {
+    position: absolute;
+    left: 100%;
+    top: 55px;
+    height: 15px;
+    width: 5px;
+    background-color: yellow;
+    border-radius: 0 5px 5px 0;
 }
