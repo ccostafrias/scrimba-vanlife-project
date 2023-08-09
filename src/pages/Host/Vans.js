@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 
-import Loading from "../../components/Loading"
+import { getHostVans } from "../../api"
+
+export function loader() {
+    return getHostVans()
+}
 
 export default function Vans() {
-    const [vans, setVans] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
-
-    useEffect(() => {
-        fetch("/api/host/vans")
-            .then(res => res.json())
-            .then(data => {
-                setVans(data.vans)
-                setIsLoading(false)
-            })
-            
-    }, [])
+    const vans = useLoaderData()
 
     const vansElement = vans.map(van => {
         return (
@@ -31,7 +24,7 @@ export default function Vans() {
 
     return (
         <>
-            {!isLoading ? (
+            {
                 vans.length === 0 ? (
                     <section className="host-vans">
                         <div className="host-vans--cards">
@@ -49,10 +42,7 @@ export default function Vans() {
                         </div>
                     </section>
                 )
-
-            ) : (
-                <Loading />
-            )}
+            }
         </>
     )
 }

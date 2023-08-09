@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { useParams, useOutletContext } from "react-router-dom"
+import React, { useState } from "react"
+import { useOutletContext } from "react-router-dom"
 
 export default function Details() {
     const [van, setVan] = useState(useOutletContext())

@@ -1,9 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
+import { useOutletContext } from "react-router-dom"
 
 export default function Photos() {
+    const [van, setVan] = useState(useOutletContext())
+
     return (
         <>
-            <h1>PHOTOS ASSHOLE</h1>
+            <img className="detail-van-img" src={van.imageUrl} />
         </>
     )
 }

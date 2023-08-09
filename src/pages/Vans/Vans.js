@@ -1,31 +1,53 @@
 import React, { useState, useEffect } from "react"
+import { useSearchParams, useLoaderData } from "react-router-dom"
 
 import Van from "./Van"
 import Filter from "../../components/Filter"
-import Loading from "../../components/Loading"
+
+import { getVans } from "../../api"
+
+export function loader() {
+    return getVans()
+}
 
 export default function Vans() {
-    const [vans, setVans] = useState([])
+    const vans = useLoaderData()
     const [types, setTypes] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    useEffect(() => {
-        fetch("/api/vans")
-            .then(res => res.json())
-            .then(data => {
-                setVans(data.vans)
-                setIsLoading(false)
-            })
-            
-    }, [])
+    const queryType = searchParams.get("type")
         
     useEffect(() => {
-        if (vans !== []) {
-            setTypes([...new Set(vans.map(van => van.type))].map((type, id) => ({type, selected: false, id})))
+        if (vans.length !== 0) {
+            setTypes(
+                [...new Set(
+                    vans.map(van => van.type))]
+                        .map((type, id) => {
+
+                            return ({type, selected: type === queryType ? true : false, id})
+                        }
+                )
+            )
         }
     }, [vans])
+    
+    useEffect(() => {
+        if (types.length !== 0) {
+            setSearchParams(prevParams => {
+                const selected = types.find(type => type.selected === true)?.type
 
-    const vanElements = getVans(vans).map(van => {
+                if (selected) {
+                    prevParams.set('type', selected)
+                } else {
+                    prevParams.delete('type')
+                }
+                
+                return prevParams
+            })
+        }
+    }, [types])
+
+    const vanElements = filterVans(vans).map(van => {
         return (
                 <Van
                     key={van.id}
@@ -35,12 +57,13 @@ export default function Vans() {
                     description={van.description}
                     price={van.price}
                     type={van.type}
-                    selectTag={() => selectTag(van.type)}
+                    queryState={searchParams.get('type')}
+                    selectFilter={() => selectFilter(van.type)}
                 />
             )
-        })
+    })
 
-    function getVans(arr) {
+    function filterVans(arr) {
         return types.every(type => !type.selected) ? 
             arr :
             arr.filter(van => {
@@ -48,29 +71,17 @@ export default function Vans() {
                 return realTypes.some(realType => realType === van.type)
             })
     }
-
-    function selectTag(tag) {
-        selectFilter(getId(types, "type", tag))
-    }
-
-    function getId(arr, prop, item) {
-        return arr.find(element => element[prop] === item).id
-    }
-
-    function selectFilter(id) {
+    
+    function selectFilter(tp) {
         setTypes(prevTypes => {
             return prevTypes.map(type => {
-                return type.id === id ? {...type, selected: !type.selected} : type
+                return type.type === tp ? {...type, selected: !type.selected} : {...type, selected: false}
             })
         })
     }
 
     function clearFilter() {
-        setTypes(prevTypes => {
-            return prevTypes.map(type => {
-                return {...type, selected: false}
-            })
-        })
+        selectFilter(null)
     }
 
     const filtersElements = types.map(type => {
@@ -79,32 +90,26 @@ export default function Vans() {
                 key={type.id}
                 type={type.type}
                 selected={type.selected}
-                selectFilter={() => selectFilter(type.id)}
+                selectFilter={() => selectFilter(type.type)}
             />
         )
     })
     
     return (
-        <>
-            {!isLoading ? 
-                <main className="main-vans">
-                    <h2>Explore our van options</h2>
-                    <div className="vans-filter">
-                        {filtersElements}
-                        <button 
-                            className="vans-filter--clean"
-                            onClick={clearFilter}
-                        >
-                            Clear filters
-                        </button>
-                    </div>
-                    <div className="vans-container">
-                        {vanElements}
-                    </div>
-                </main>
-            : (
-                <Loading />
-            )}
-        </>
+        <main className="main-vans">
+            <h2>Explore our van options</h2>
+            <div className="vans-filter">
+                {filtersElements}
+                <button 
+                    className="vans-filter--clean"
+                    onClick={clearFilter}
+                >
+                    Clear filters
+                </button>
+            </div>
+            <div className="vans-container">
+                {vanElements}
+            </div>
+        </main>
     )
 }
