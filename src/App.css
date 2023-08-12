@@ -75,7 +75,7 @@ body {
 .nav {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 25px;
     background-color: #FFF7ED;
     padding: 3rem 1.5rem;
 }
@@ -537,6 +537,42 @@ body {
 .main-error > h2 {
     font-size: var(--fs-xl);
     font-weight: var(--fw-bold);
+}
+
+/* Login */
+
+.main-login {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.main-login > h2 {
+    text-align: center;
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
+    margin-bottom: 1em;
+}
+
+.main-login > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-login > form > input:not([type="submit"]) {
+    background-color: #fff;
+    border: 1px solid #4D4D4D;
+    border-top: none;
+    padding: 1em;
+}
+
+.main-login > form > input:not([type="submit"]):first-child {
+    border-radius: 5px 5px 0 0;
+    border-top: 1px solid #4D4D4D;
+}
+
+.main-login > form > input:has(+ input[type="submit"]) {
+    border-radius: 0 0 5px 5px;
 }
 
 /* Kombi */

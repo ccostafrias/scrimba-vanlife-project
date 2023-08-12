@@ -1,5 +1,7 @@
 import React from "react"
+import { render } from 'react-dom'
 import { Outlet, NavLink, Link } from "react-router-dom"
+import { PersonCircleOutline } from 'react-ionicons'
 
 import Footer from "../Footer"
 
@@ -52,6 +54,19 @@ function Header() {
                     }}
                 >
                     Vans
+                </NavLink>
+                <NavLink
+                    to="/login"
+                    className={({isActive}) => {
+                        let active = isActive ? " active-link" : ''
+                        return 'hover-opacity' + active
+                    }}    
+                >
+                    <PersonCircleOutline
+                        color={'#000000'} 
+                        height="25px"
+                        width="25px"
+                    />
                 </NavLink>
             </header>
 

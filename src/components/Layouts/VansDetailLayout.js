@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react"
 import { Outlet, Link, NavLink, useLoaderData } from "react-router-dom"
 
 import { getHostVan } from "../../api"
+import { requireAuth } from "../../utils"
 
-export function loader({ params }) {
-    const {id} = params
-    return getHostVan(id)
+export async function loader({ params }) {
+    await requireAuth()
+    return getHostVan(params.id)
 }
 
 export default function VansDetail() {

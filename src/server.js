@@ -20,6 +20,7 @@ createServer({
         this.logging = false
 
         this.get("/vans", (schema, request) => {
+            // throw new Error("This is an error")
             return schema.vans.all()
         })
 

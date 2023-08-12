@@ -10,9 +10,7 @@ export default function ErrorPage() {
 
     return (
         <main className="main-error">
-            <h2>Sorry, an error ocurred</h2>
-            <br/>
-            <h2>{error.message}</h2>
+            <h2>Error: {error.message}</h2>
             <pre>{error.status} - {error.statusText}</pre>
             <Link to="/" className="button black-bg hover-opacity">Return to home</Link>
         </main>
