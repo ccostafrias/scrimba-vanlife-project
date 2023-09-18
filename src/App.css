@@ -353,6 +353,11 @@ body {
     color: #fff;
 }
 
+.button:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+}
+
 .orange-bg { background-color: #FF8C38; }
 .black-bg { background-color: #161616; }
 
@@ -573,6 +578,14 @@ body {
 
 .main-login > form > input:has(+ input[type="submit"]) {
     border-radius: 0 0 5px 5px;
+}
+
+.alert-box {
+    color: red;
+    /* font-size: var(--fs-500); */
+    /* font-weight: var(--fw-bold); */
+    text-align: center;
+    margin: 1em 0;
 }
 
 /* Kombi */

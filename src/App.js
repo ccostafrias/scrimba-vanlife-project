@@ -1,6 +1,7 @@
 import React from "react"
 import { 
-    RouterProvider as Router, 
+    RouterProvider as Router,
+    createHashRouter,
     createBrowserRouter, 
     createRoutesFromElements,
     Route,
@@ -26,7 +27,7 @@ import Details from "./pages/Host/VansDetail/Details"
 import Pricing from "./pages/Host/VansDetail/Pricing"
 import Photos from "./pages/Host/VansDetail/Photos"
 
-import Login from "./pages/Login"
+import Login, { loader as loginLoader, action as loginAction } from "./pages/Login"
 import { requireAuth } from "./utils"
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -42,25 +43,15 @@ const router = createBrowserRouter(createRoutesFromElements(
         >
             <Route 
                 index element={<Dashboard />}
-                loader={async () => {
-                    await requireAuth()
-                    return null
-                }}
+                loader={async () => await requireAuth()}
             />
             <Route 
                 path="income" element={<Income />}
-                loader={async () => {
-                    await requireAuth()
-                    return null
-                }}
+                loader={async () => await requireAuth()}
             />
             <Route 
                 path="reviews" element={<Reviews />}
-                loader={async () => {
-                    await requireAuth()
-                    return null
-                }
-            }/>
+                loader={async () => await requireAuth()}/>
             <Route 
                 path="vans" element={<HostVans />}
                 loader={hostVansLoader}
@@ -71,31 +62,23 @@ const router = createBrowserRouter(createRoutesFromElements(
             >
                 <Route 
                     index element={<Details />} 
-                    loader={async () => {
-                        await requireAuth()
-                        return null
-                    }}
+                    loader={async () => await requireAuth()}
                 />
                 <Route 
                     path="pricing" element={<Pricing />}
-                    loader={async () => {
-                        await requireAuth()
-                        return null
-                    }}
+                    loader={async () => await requireAuth()}
                 />
                 <Route 
                     path="photos" element={<Photos />}
-                    loader={async () => {
-                        await requireAuth()
-                        return null
-                    }
-                }/>
+                    loader={async () => await requireAuth()}/>
             </Route>
         </Route>
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Login />} loader={loginLoader} action={loginAction}/>
         <Route path="*" element={<NotFound/>}/>
     </Route>
-), {basename: "/scrimba-vanlife-project"})
+)
+, {basename: "/scrimba-vanlife-project"}
+)
 
 export default function App() {
     return (

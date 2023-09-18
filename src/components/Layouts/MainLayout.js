@@ -18,6 +18,10 @@ export default function Layout() {
 }
 
 function Header() {
+    function fakeLogOut() {
+        localStorage.removeItem("loggedIn")
+    }
+
     return (
         <>
             <header className="nav">
@@ -68,6 +72,7 @@ function Header() {
                         width="25px"
                     />
                 </NavLink>
+                <button onClick={fakeLogOut}>X</button>
             </header>
 
         </>
