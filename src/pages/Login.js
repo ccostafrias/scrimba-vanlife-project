@@ -15,10 +15,13 @@ export async function action({ request }) {
     const formData = await request.formData()
     const email = formData.get("email")
     const password = formData.get("password")
+
+    const path = new URL(request.url).searchParams.get("redirectTo") || "/host"
+
     try {
         const data = await loginUser({ email, password })
         localStorage.setItem("loggedIn", true)
-        return "redirect"
+        return ({ redirect: true, path })
 
     } catch(err) {
         return err
@@ -32,8 +35,8 @@ export default function Login() {
 
     return (
         <>
-            {actionData === "redirect" ? (
-                <Navigate to="/host" replace />
+            {actionData?.redirect ? (
+                <Navigate to={actionData.path} replace />
             ) : (
                 <main className="main-login">
                     <h2>Sign in to your account</h2>
