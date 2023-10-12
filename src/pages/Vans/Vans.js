@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useSearchParams, useLoaderData, defer, Await } from "react-router-dom"
+import { useSearchParams, useLoaderData } from "react-router-dom"
 
 import Van from "./Van"
 import Filter from "../../components/Filter"
@@ -7,8 +7,6 @@ import Filter from "../../components/Filter"
 import { getVans } from "../../api"
 
 export function loader() {
-    // const vansPromise = getVans()
-    // return defer({vans: vansPromise})
     return getVans()
 }
 

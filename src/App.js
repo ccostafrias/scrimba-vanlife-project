@@ -17,7 +17,7 @@ import NotFound from "./pages/NotFound"
 import ErrorPage from "./pages/ErrorPage"
 
 import HostLayout from "./components/Layouts/HostLayout"
-import Dashboard from "./pages/Host/Dashboard"
+import Dashboard, { loader as hostDashboardLoader } from "./pages/Host/Dashboard"
 import Income from "./pages/Host/Income"
 import Reviews from "./pages/Host/Reviews"
 import HostVans, { loader as hostVansLoader } from "./pages/Host/Vans"
@@ -33,17 +33,26 @@ import { requireAuth } from "./utils"
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/"element={<MainLayout/>}>
         <Route index element={<Main />}/>
-        <Route path="about" element={<About />
-        }/>
-        <Route path="vans" element={<Vans />} loader={vansLoader} errorElement={<ErrorPage />}/>
-        <Route path="vans/:id" element={<VanDetail />} loader={vansDetailLoader} errorElement={<ErrorPage />}/>
+        <Route path="about" element={<About />}/>
+        <Route 
+            path="vans" 
+            element={<Vans />} 
+            loader={vansLoader} 
+            errorElement={<ErrorPage />}
+        />
+        <Route 
+            path="vans/:id" 
+            element={<VanDetail />} 
+            loader={vansDetailLoader} 
+            errorElement={<ErrorPage />}
+        />
         <Route path="host" 
             element={<HostLayout />}
             errorElement={<ErrorPage />}
         >
             <Route 
                 index element={<Dashboard />}
-                loader={async ({request}) => await requireAuth(request)}
+                loader={hostDashboardLoader}
             />
             <Route 
                 path="income" element={<Income />}
@@ -73,7 +82,12 @@ const router = createBrowserRouter(createRoutesFromElements(
                     loader={async ({request}) => await requireAuth(request)}/>
             </Route>
         </Route>
-        <Route path="login" element={<Login />} loader={loginLoader} action={loginAction}/>
+        <Route 
+            path="login" 
+            element={<Login />} 
+            loader={loginLoader} 
+            action={loginAction}
+        />
         <Route path="*" element={<NotFound/>}/>
     </Route>
 )

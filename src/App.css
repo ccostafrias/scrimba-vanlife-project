@@ -14,7 +14,7 @@
 :root {
     --font-main:  'Inter', sans-serif;
 
-    --fs-xl: 2rem;
+    --fs-xl: 3rem;
     --fs-600: 1.5rem;
     --fs-500: 1.25rem;
     --fs-400: 1rem;
@@ -205,7 +205,7 @@ body {
 
 /* Main Vans */
 
-.main-vans, .main-detail {
+.main-vans, .main-detail, .main-hosts {
     padding: 3rem 2rem 5rem;
     margin: auto;
     max-width: 720px;
@@ -410,15 +410,15 @@ body {
 .host-vans {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     max-width: 620px;
     margin: 0 auto;
     padding: 3rem 2rem;
 }
 
-.host-vans > h2 {
+.host-vans > h2, .title {
     font-weight: var(--fw-black);
     font-size: var(--fs-xl);
+    margin-bottom: 2rem;
 }
 
 .host-vans--cards {
@@ -526,6 +526,53 @@ body {
     width: 100px;
     border-radius: 5px;
 }
+
+/* Host Dashboard */
+
+.host-header > :first-child { background-color: #FFEAD0}
+.host-header > :last-child { background-color: #FFDDB2}
+
+.center {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+}
+
+.review-score {
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-500);
+}
+
+.review {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.rate {
+    display: flex;
+    align-items: center;
+    gap: 2.5px;
+}
+
+.welcome {
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-600);
+    margin-bottom: .5em;
+}
+
+.income {
+    display: block;
+    font-weight: var(--fw-black);
+    font-size: var(--fs-xl);
+    margin-top: .75em;
+}
+
+.underline { text-decoration: underline }
+.bold { font-weight: var(--fw-bold) }
 
 /* Error Page */
 
