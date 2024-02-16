@@ -11,8 +11,6 @@ export async function loader({request}) {
 }
 
 export default function Dashboard() {
-    const [income, setIncome] = useState()
-
     const vans = useLoaderData()
     const vansElement = vans.map(van => {
         return (
@@ -73,7 +71,7 @@ function Van(props) {
     const {name, imageUrl, price, id} = props
 
     return (
-        <Link to={id}>
+        <Link to={`vans/${id}`}>
             <div className="host-vans--card">
                 <img src={imageUrl} />
                 <div className="host-vans--card--text">

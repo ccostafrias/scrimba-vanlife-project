@@ -68,3 +68,29 @@ export async function loginUser(creds) {
 
     return data
 }
+
+export async function getHostTransactions() {
+    const res = await fetch("/api/host/transactions")
+    if (!res.ok) {
+        throw {
+            message: "Failed to fetch transactions", 
+            statusText: res.statusText,
+            status: res.status
+        }
+    }
+    const data = await res.json()
+    return data.transactions
+}
+
+export async function getReviews() {
+    const res = await fetch("/api/host/reviews")
+    if (!res.ok) {
+        throw {
+            message: "Failed to fetch reviews", 
+            statusText: res.statusText,
+            status: res.status
+        }
+    }
+    const data = await res.json()
+    return data.reviews
+}

@@ -18,8 +18,8 @@ import ErrorPage from "./pages/ErrorPage"
 
 import HostLayout from "./components/Layouts/HostLayout"
 import Dashboard, { loader as hostDashboardLoader } from "./pages/Host/Dashboard"
-import Income from "./pages/Host/Income"
-import Reviews from "./pages/Host/Reviews"
+import Income, { loader as hostIncomeLoader } from "./pages/Host/Income"
+import Reviews, { loader as hostReviewsLoader } from "./pages/Host/Reviews"
 import HostVans, { loader as hostVansLoader } from "./pages/Host/Vans"
 
 import HostVansDetail, { loader as hostVansDetailLoader } from "./components/Layouts/VansDetailLayout"
@@ -56,11 +56,11 @@ const router = createBrowserRouter(createRoutesFromElements(
             />
             <Route 
                 path="income" element={<Income />}
-                loader={async ({request}) => await requireAuth(request)}
+                loader={hostIncomeLoader}
             />
             <Route 
                 path="reviews" element={<Reviews />}
-                loader={async ({request}) => await requireAuth(request)}/>
+                loader={hostReviewsLoader}/>
             <Route 
                 path="vans" element={<HostVans />}
                 loader={hostVansLoader}
