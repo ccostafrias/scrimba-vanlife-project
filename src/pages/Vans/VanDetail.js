@@ -13,10 +13,9 @@ export default function VanDetail() {
     const location = useLocation()
     const search = location.state.search
 
-
     return (
         <main className="main-detail">
-            <Link to={`..?type=${search}`} relative="path">
+            <Link to={search ? `..?type=${search}` : `..`} relative="path">
                 <span className="arrow">&lt;- </span>
                 <span className="detail--back">Back to {search ? `${search}` : "all"} vans</span>
             </Link>

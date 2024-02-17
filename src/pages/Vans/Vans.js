@@ -2,50 +2,20 @@ import React, { useState, useEffect } from "react"
 import { useSearchParams, useLoaderData } from "react-router-dom"
 
 import Van from "./Van"
-import Filter from "../../components/Filter"
 
 import { getVans } from "../../api"
 
 export function loader() {
+    console.log('TESTE')
     return getVans()
 }
 
 export default function Vans() {
     const vans = useLoaderData()
-    const [types, setTypes] = useState([])
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    const queryType = searchParams.get("type")
-        
-    useEffect(() => {
-        if (vans.length !== 0) {
-            setTypes(
-                [...new Set(
-                    vans.map(van => van.type))]
-                        .map((type, id) => {
-
-                            return ({type, selected: type === queryType ? true : false, id})
-                        }
-                )
-            )
-        }
-    }, [vans])
+    const types = [...new Set(vans.map(van => van.type))]
     
-    useEffect(() => {
-        if (types.length !== 0) {
-            setSearchParams(prevParams => {
-                const selected = types.find(type => type.selected === true)?.type
-
-                if (selected) {
-                    prevParams.set('type', selected)
-                } else {
-                    prevParams.delete('type')
-                }
-                
-                return prevParams
-            })
-        }
-    }, [types])
+    const [searchParams, setSearchParams] = useSearchParams();
+    const queryType = searchParams.get("type")
 
     const vanElements = filterVans(vans).map(van => {
         return (
@@ -64,19 +34,20 @@ export default function Vans() {
     })
 
     function filterVans(arr) {
-        return types.every(type => !type.selected) ? 
-            arr :
-            arr.filter(van => {
-                const realTypes = types.filter(type => type.selected).map(type => type.type)
-                return realTypes.some(realType => realType === van.type)
-            })
+        return queryType ? 
+            arr.filter(van => van.type === queryType) :
+            arr
     }
     
     function selectFilter(tp) {
-        setTypes(prevTypes => {
-            return prevTypes.map(type => {
-                return type.type === tp ? {...type, selected: !type.selected} : {...type, selected: false}
-            })
+        setSearchParams(prevParams => {
+            if (tp && queryType !== tp) {
+                prevParams.set('type', tp)
+            } else {
+                prevParams.delete('type')
+            }
+            
+            return prevParams
         })
     }
 
@@ -86,12 +57,12 @@ export default function Vans() {
 
     const filtersElements = types.map(type => {
         return (
-            <Filter 
-                key={type.id}
-                type={type.type}
-                selected={type.selected}
-                selectFilter={() => selectFilter(type.type)}
-            />
+            <div 
+                className={`filter ${type === queryType ? `van--type-${type}` : ''}`}
+                onClick={() => selectFilter(type)}
+            >
+                {type}
+            </div>
         )
     })
     

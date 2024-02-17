@@ -72,7 +72,7 @@ function Header() {
                         width="25px"
                     />
                 </NavLink>
-                <button onClick={fakeLogOut}>X</button>
+                {/* <button onClick={fakeLogOut}>X</button> */}
             </header>
 
         </>

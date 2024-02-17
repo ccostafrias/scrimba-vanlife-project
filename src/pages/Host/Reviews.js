@@ -18,6 +18,7 @@ export default function Reviews() {
     const reviewsElement = reviews.sort((a, b) => a.rating + b.rating).map(review => {
         return (
             <Review
+                key={review.id}
                 user={review.user}
                 rating={review.rating}
                 commentary={review.commentary}

@@ -1,54 +1,116 @@
+import { initializeApp } from "firebase/app";
+import { 
+    getFirestore, 
+    collection, 
+    getDocs, 
+    doc,
+    getDoc,
+    where,
+    query,
+} from "firebase/firestore/lite" 
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCBBK-6GGjLnITsU1Psm2ZS0cwhRrmTZwA",
+  authDomain: "vanlife-project-wilso.firebaseapp.com",
+  projectId: "vanlife-project-wilso",
+  storageBucket: "vanlife-project-wilso.appspot.com",
+  messagingSenderId: "1050976546348",
+  appId: "1:1050976546348:web:458d910374d86c9f94ab89"
+};
+
+// Initialize Firebase
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app) // Database
+
+const vansCollectionRef = collection(db, "vans")
+
+// API by Firebase
+
 export async function getVans() {
-    const res = await fetch("/api/vans")
-    if (!res.ok) {
-        throw {
-            message: "Failed to fetch vans", 
-            statusText: res.statusText,
-            status: res.status
-        }
-    }
-    const data = await res.json()
-    return data.vans
+    const querySnapshot = await getDocs(vansCollectionRef)
+    const dataArr = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+    }))
+
+    return dataArr
 }
 
 export async function getVan(id) {
-    const res = await fetch(`/api/vans/${id}`)
-    if (!res.ok) {
-        throw {
-            message: "Failed to fetch vans", 
-            statusText: res.statusText,
-            status: res.status
-        }
+    const docRef = doc(db, "vans", id)
+    const docSnap = await getDoc(docRef)
+    return {
+        ...docSnap.data(),
+        id: docSnap.id,
     }
-    const data = await res.json()
-    return data.vans
 }
 
 export async function getHostVans() {
-    const res = await fetch("/api/host/vans")
-    if (!res.ok) {
-        throw {
-            message: "Failed to fetch vans", 
-            statusText: res.statusText,
-            status: res.status
-        }
-    }
-    const data = await res.json()
-    return data.vans
+    const q = query(vansCollectionRef, where("hostId", "==", 123))
+    const querySnapshot = await getDocs(q)
+    const dataArr = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+    }))
+
+    return dataArr
 }
 
-export async function getHostVan(id) {
-    const res = await fetch(`/api/host/vans/${id}`)
-    if (!res.ok) {
-        throw {
-            message: "Failed to fetch vans", 
-            statusText: res.statusText,
-            status: res.status
-        }
-    }
-    const data = await res.json()
-    return data.vans
-}
+// API by .server
+
+// export async function getVans() {
+//     const res = await fetch("/api/vans")
+//     if (!res.ok) {
+//         throw {
+//             message: "Failed to fetch vans", 
+//             statusText: res.statusText,
+//             status: res.status
+//         }
+//     }
+//     const data = await res.json()
+//     return data.vans
+// }
+
+// export async function getVan(id) {
+//     const res = await fetch(`/api/vans/${id}`)
+//     if (!res.ok) {
+//         throw {
+//             message: "Failed to fetch vans", 
+//             statusText: res.statusText,
+//             status: res.status
+//         }
+//     }
+//     const data = await res.json()
+//     return data.vans
+// }
+
+// export async function getHostVans() {
+//     const res = await fetch("/api/host/vans")
+//     if (!res.ok) {
+//         throw {
+//             message: "Failed to fetch vans", 
+//             statusText: res.statusText,
+//             status: res.status
+//         }
+//     }
+//     const data = await res.json()
+//     return data.vans
+// }
+
+// export async function getHostVan(id) {
+//     const res = await fetch(`/api/host/vans/${id}`)
+//     if (!res.ok) {
+//         throw {
+//             message: "Failed to fetch vans", 
+//             statusText: res.statusText,
+//             status: res.status
+//         }
+//     }
+//     const data = await res.json()
+//     return data.vans
+// }
 
 export async function loginUser(creds) {
     const res = await fetch("/api/login",
