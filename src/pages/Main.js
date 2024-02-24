@@ -1,11 +1,7 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 
-export default function Main() {
-    useEffect(() => {
-        document.title = "VansLife"
-    }, [])
-    
+export default function Main() {        
     return (
         <main className="main-home">
             <div className="main-home--content">

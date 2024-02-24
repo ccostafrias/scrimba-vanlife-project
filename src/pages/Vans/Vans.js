@@ -6,7 +6,6 @@ import Van from "./Van"
 import { getVans } from "../../api"
 
 export function loader() {
-    console.log('TESTE')
     return getVans()
 }
 

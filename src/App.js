@@ -1,10 +1,10 @@
 import React from "react"
 import { 
     RouterProvider as Router,
-    createHashRouter,
     createBrowserRouter, 
     createRoutesFromElements,
     Route,
+    Navigate,
 } from "react-router-dom"
 
 import MainLayout from "./components/Layouts/MainLayout"
@@ -27,8 +27,21 @@ import Details from "./pages/Host/VansDetail/Details"
 import Pricing from "./pages/Host/VansDetail/Pricing"
 import Photos from "./pages/Host/VansDetail/Photos"
 
-import Login, { loader as loginLoader, action as loginAction } from "./pages/Login"
+import { AuthProvider } from "./contexts/auth"
+import useAuth from "./hooks/useAuth"
+
+import Login, { 
+    loader as loginLoader, 
+    // action as loginAction
+} from "./pages/Login"
+
 import { requireAuth } from "./utils"
+
+function Private({ Item }) {
+    const { signed } = useAuth()
+    const path = new URL(window.location.href).pathname.split('/').filter((p, i) => i !== 1).join('/')
+    return signed ? <Item /> : <Navigate to={`/login?message=You must log in first&redirectTo=${path}`}/>
+}
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/"element={<MainLayout/>}>
@@ -47,7 +60,7 @@ const router = createBrowserRouter(createRoutesFromElements(
             errorElement={<ErrorPage />}
         />
         <Route path="host" 
-            element={<HostLayout />}
+            element={<Private Item={HostLayout}/>}
             errorElement={<ErrorPage />}
         >
             <Route 
@@ -71,22 +84,23 @@ const router = createBrowserRouter(createRoutesFromElements(
             >
                 <Route 
                     index element={<Details />} 
-                    loader={async ({request}) => await requireAuth(request)}
+                    // loader={async ({request}) => await requireAuth(request)}
                 />
                 <Route 
                     path="pricing" element={<Pricing />}
-                    loader={async ({request}) => await requireAuth(request)}
+                    // loader={async ({request}) => await requireAuth(request)}
                 />
                 <Route 
                     path="photos" element={<Photos />}
-                    loader={async ({request}) => await requireAuth(request)}/>
+                    // loader={async ({request}) => await requireAuth(request)}
+                />
             </Route>
         </Route>
         <Route 
             path="login" 
             element={<Login />} 
             loader={loginLoader} 
-            action={loginAction}
+            // action={loginAction}
         />
         <Route path="*" element={<NotFound/>}/>
     </Route>
@@ -96,8 +110,10 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 export default function App() {
     return (
-        <Router 
-            router={router}
-        />
+        <AuthProvider>
+            <Router 
+                router={router}
+            />
+        </AuthProvider>
     )
 }

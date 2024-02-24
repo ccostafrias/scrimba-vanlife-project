@@ -4,10 +4,6 @@ import { Link, useRouteError } from "react-router-dom"
 export default function ErrorPage() {
     const error = useRouteError()
 
-    useEffect(() => {
-        document.title = "Fatal Error!"
-    }, [])
-
     return (
         <main className="main-error">
             <h2>Error: {error.message}</h2>

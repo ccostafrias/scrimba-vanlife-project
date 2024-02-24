@@ -7,7 +7,7 @@ import { requireAuth } from "../../utils"
 import graph from "../../images/income-graph.png"
 
 export async function loader({request}) {
-    await requireAuth(request)
+    // await requireAuth(request)
     return getHostTransactions()
 }
 

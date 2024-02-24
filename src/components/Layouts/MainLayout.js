@@ -1,7 +1,9 @@
 import React from "react"
-import { render } from 'react-dom'
-import { Outlet, NavLink, Link } from "react-router-dom"
+import { Outlet, NavLink, Link, useNavigate } from "react-router-dom"
 import { PersonCircleOutline } from 'react-ionicons'
+
+import { useSignOut } from 'react-firebase-hooks/auth'
+import { auth } from "../../api"
 
 import Footer from "../Footer"
 
@@ -18,8 +20,14 @@ export default function Layout() {
 }
 
 function Header() {
-    function fakeLogOut() {
-        localStorage.removeItem("loggedIn")
+    const navigate = useNavigate()
+    const [signOut, loading, error] = useSignOut(auth);
+
+    async function logOut() {
+        const sucess = await signOut()
+        if (sucess) {
+            navigate("/")
+        }
     }
 
     return (
@@ -72,7 +80,7 @@ function Header() {
                         width="25px"
                     />
                 </NavLink>
-                {/* <button onClick={fakeLogOut}>X</button> */}
+                <button onClick={logOut}>X</button>
             </header>
 
         </>

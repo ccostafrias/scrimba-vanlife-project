@@ -9,7 +9,7 @@ import { requireAuth } from "../../utils"
 import reviewsImg from "../../images/reviews-graph.png"
 
 export async function loader({request}) {
-    await requireAuth(request)
+    // await requireAuth(request)
     return getReviews()
 }
 
@@ -43,7 +43,7 @@ export default function Reviews() {
                         }}></div>
                     </div>
                 </div>
-                <span className="review-percentage">{percentage}%</span>
+                <span className="review-percentage">{percentage.toFixed(0)}%</span>
             </>
         )
     }).reverse()
