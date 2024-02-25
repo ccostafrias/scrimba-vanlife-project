@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function Main() {
     const location = useLocation()
-    const loggedOut = location.state?.logedOut || true
+    const loggedOut = location.state?.logedOut
 
     useEffect(() => {
         if (loggedOut) {
