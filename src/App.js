@@ -1,7 +1,8 @@
 import React from "react"
 import { 
     RouterProvider as Router,
-    createBrowserRouter, 
+    createBrowserRouter,
+    createHashRouter,
     createRoutesFromElements,
     Route,
     Navigate,
@@ -43,7 +44,8 @@ function Private({ Item }) {
     return signed ? <Item /> : <Navigate to={`/login?message=You must log in first&redirectTo=${path}`}/>
 }
 
-const router = createBrowserRouter(createRoutesFromElements(
+// const router = createBrowserRouter(createRoutesFromElements(
+const router = createHashRouter(createRoutesFromElements(
     <Route path="/"element={<MainLayout/>}>
         <Route index element={<Main />}/>
         <Route path="about" element={<About />}/>
@@ -105,7 +107,7 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path="*" element={<NotFound/>}/>
     </Route>
 )
-, {basename: "/scrimba-vanlife-project"}
+// , {basename: "/scrimba-vanlife-project"}
 )
 
 export default function App() {

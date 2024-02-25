@@ -15,7 +15,8 @@ export default function Income() {
     const transactions = useLoaderData()
     const transactionsElement = transactions.map(transaction => {
         return (
-            <Transaction 
+            <Transaction
+                key={transaction.id} 
                 price={transaction.price}
                 date={transaction.date}
             />

@@ -54,14 +54,14 @@ export default function Vans() {
         selectFilter(null)
     }
 
-    const filtersElements = types.map(type => {
+    const filtersElements = types.map((type, i) => {
         return (
-            <div 
-                className={`filter ${type === queryType ? `van--type-${type}` : ''}`}
-                onClick={() => selectFilter(type)}
-            >
-                {type}
-            </div>
+            <Filter
+                key={i}
+                type={type}
+                queryType={queryType}
+                selectFilter={() => selectFilter(type)}
+            />
         )
     })
     
@@ -81,5 +81,22 @@ export default function Vans() {
                 {vanElements}
             </div>
         </main>
+    )
+}
+
+function Filter(props) {
+    const {
+        type, 
+        queryType, 
+        selectFilter,
+    } = props
+
+    return (
+        <div 
+            className={`filter ${type === queryType ? `van--type-${type}` : ''}`}
+            onClick={selectFilter}
+        >
+            {type}
+        </div>
     )
 }

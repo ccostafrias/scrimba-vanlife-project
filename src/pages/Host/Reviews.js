@@ -50,7 +50,7 @@ export default function Reviews() {
 
     return (
         <main className="reviews-main">
-            <header>
+            <section>
                 <h2 className="reviews-title">Your reviews</h2>
                 <div className="rating-average--box">
                     <span className="rating-average">{average}</span>
@@ -65,7 +65,7 @@ export default function Reviews() {
                     {reviewsGraph}
                 </div>
                 {/* <img src={reviewsImg} alt="reviews graph"/> */}
-            </header>
+            </section>
             <section>
                 <h2 className="reviews">Reviews ({reviews.length})</h2>
                 <ul>
@@ -131,5 +131,13 @@ function Review(props) {
             </header>
             <p>{commentary}</p>
         </li>
+    )
+}
+
+function Graph(props) {
+    const {} = props
+    return (
+        <>
+        </>
     )
 }

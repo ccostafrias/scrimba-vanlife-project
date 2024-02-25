@@ -328,15 +328,35 @@ body {
     position: relative;
 }
 
-.detail--content {
-    display: flex;
-    flex-direction: column;
+.detail--container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     gap: 1em;
 }
 
 .detail--image {
-    margin: 2em 0 2em;
     border-radius: 5px;
+}
+
+.link {
+    display: block;
+    width: fit-content;
+    margin-bottom: 2em;
+}
+
+.detail--content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+@media (max-width: 750px) {
+    .detail--container, .detail--container {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
 }
 
 /* Others */
@@ -490,7 +510,7 @@ body {
     font-weight: var(--fw-regular);
 }
 
-.host-vans--detail .van--type, .detail--content .van--type {
+.host-vans--detail .van--type, .detail--container .van--type {
     cursor: auto;
     user-select: none;
 }
